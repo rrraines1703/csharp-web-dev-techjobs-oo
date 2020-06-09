@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NuGet.Frameworks;
 using TechJobsOO;
 
 namespace UnitTestProject1
@@ -40,6 +41,47 @@ namespace UnitTestProject1
         {
             Job jobOne = new Job("Product Tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality Control"), new CoreCompetency("Persistence"));
             Assert.IsFalse(Equals(test_job, jobOne));
+        }
+
+        [TestMethod]
+        public void TestJobsToString()
+        {
+            Job jobOne = new Job("Product Tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality Control"), new CoreCompetency("Persistence"));
+
+            string[] jobOneTest = jobOne.ToString().Split("\n");
+
+            Assert.AreEqual(jobOneTest[0], "");
+            Assert.AreEqual(jobOneTest[7], "");
+        }
+
+        [TestMethod]
+        public void TestLabelDataLine()
+        {
+            Job jobOne = new Job("Product Tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality Control"), new CoreCompetency("Persistence"));
+
+            string[] jobOneTest = jobOne.ToString().Split("\n");
+
+            Assert.AreEqual(jobOneTest[2], "Name: Product Tester");
+        }
+
+        [TestMethod]
+        public void TestEmptyField()
+        {
+            Job jobOne = new Job("Product Tester", new Employer(""), new Location("Desert"), new PositionType("Quality Control"), new CoreCompetency("Persistence"));
+
+            string[] jobOneTest = jobOne.ToString().Split("\n");
+
+            Assert.AreEqual(jobOneTest[3], "Employer: Data not available");
+        }
+
+        [TestMethod]
+        public void TestOnlyId()
+        {
+            Job jobOne = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
+
+            string[] jobOneTest = jobOne.ToString().Split("\n");
+
+            Assert.AreEqual(jobOneTest[1], "OOPS! This job does not seem to exist.");
         }
     }
 }

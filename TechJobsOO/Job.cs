@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Text;
+using System.Threading.Tasks.Dataflow;
+
 namespace TechJobsOO
 {
     public class Job
@@ -38,6 +41,17 @@ namespace TechJobsOO
         public override int GetHashCode()
         {
             return HashCode.Combine(Id);
+        }
+
+        public override string ToString()
+        {
+            if (!(Equals(Name, "") && Equals(EmployerName.ToString(), "") && Equals(EmployerLocation.ToString(), "") && Equals(JobType.ToString(), "") && Equals(JobCoreCompetency.ToString(), "")))
+            {
+                return ("\n" + "ID: " + Id + "\n" + "Name: " + (Name != "" ? Name : "Data not available") + "\n" + "Employer: " + (EmployerName.ToString() != "" ? EmployerName.ToString() : "Data not available") + "\n" + "Location: " + (EmployerLocation.ToString() != "" ? EmployerLocation.ToString() : "Data not available") + "\n" + "Postion Type: " + (JobType.ToString() != "" ? JobType.ToString() : "Data not available") + "\n" + "Core Competency: " + (JobCoreCompetency.ToString() != "" ? JobCoreCompetency.ToString() : "Data not available") + "\n");
+            } else
+            {
+                return ($"\nOOPS! This job does not seem to exist.\n");
+            }
         }
     }
 }
